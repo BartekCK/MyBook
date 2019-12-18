@@ -23,6 +23,9 @@ export class BooksService {
     }
 
     async deleteOne(id: string): Promise<Book> {
-        return await this.bookModel.deleteOne(id);
+        return await this.bookModel.deleteOne({_id: id});
+    }
+    async updateOne(id: string, createBookDto: CreateBookDto): Promise<Book>{
+        return await this.bookModel.updateOne({_id: id}, createBookDto);
     }
 }
