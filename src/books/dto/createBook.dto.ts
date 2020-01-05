@@ -13,7 +13,7 @@ export class CreateBookDto {
     readonly author: string[];
 
     @ApiProperty()
-    @Min(0)
+    @Min(1)
     @Max(1000)
     readonly price: number;
 

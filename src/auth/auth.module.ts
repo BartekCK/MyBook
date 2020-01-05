@@ -8,7 +8,8 @@ import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-  imports: [UsersModule, PassportModule,
+  imports: [UsersModule,
+    PassportModule.register({defaultStrategy: 'jwt', session: false}),
   JwtModule.register({
     secret: jwtConstants.secret,
     signOptions: {expiresIn: '60000s'},

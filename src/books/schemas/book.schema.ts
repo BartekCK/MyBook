@@ -1,11 +1,26 @@
 import * as mongoose from 'mongoose';
 
 export const BookSchema = new mongoose.Schema({
-    id: String,
-    title: String,
-    author: [String],
-    price: Number,
-    pagesNumber: Number,
+    title: {
+        type: String,
+        require: true,
+        unique: true,
+    },
+    author: [{
+        type: String,
+        require: true,
+    }],
+    price: {
+        type: Number,
+        require: true,
+        min: 1,
+    },
+    pagesNumber: {
+        type: Number,
+    },
     releaseDate: Date,
-    index: Number,
+    index: {
+        type: Number,
+        unique: true,
+    },
 });

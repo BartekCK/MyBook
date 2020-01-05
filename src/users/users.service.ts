@@ -17,10 +17,6 @@ export class UsersService {
     return await this.userModel.findOne({username: user});
   }
 
-  async findByCredentials(user: string, pass: string): Promise<User> {
-    return await this.userModel.findOne({username: user, password: pass});
-  }
-
   async findAll(): Promise<User[]> {
     return await this.userModel.findAll();
   }

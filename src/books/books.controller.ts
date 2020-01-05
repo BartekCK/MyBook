@@ -1,8 +1,10 @@
-import { Controller, Post, Get, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { CreateBookDto } from './dto/book.dto';
+import { CreateBookDto } from './dto/createBook.dto';
 import { Book } from './interfaces/book.interface';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { UpdateBookDto } from './dto/updateBook.dto';
 
 @ApiTags('books')
 @Controller('books')
@@ -10,6 +12,8 @@ export class BooksController {
     constructor(private readonly booksService: BooksService) {
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @Post()
     addBook(@Body() createBookDto: CreateBookDto): Promise<Book> {
          return this.booksService.create(createBookDto);
@@ -25,12 +29,17 @@ export class BooksController {
         return this.booksService.findAll();
     }
 
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     deleteOne(@Param('id')id: string): Promise<Book> {
          return this.booksService.deleteOne(id);
     }
+
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @Put(':id')
-    update(@Param('id') id: string, @Body() createBookDto: CreateBookDto): Promise<Book>{
-        return this.booksService.updateOne(id, createBookDto);
+    update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto): Promise<Book> {
+        return this.booksService.updateOne(id, updateBookDto);
     }
 }
