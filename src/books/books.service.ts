@@ -3,7 +3,7 @@ import { Book } from './interfaces/book.interface';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UpdateBookDto } from './dto/updateBook.dto';
+import { UpdateGetBookDto } from './dto/updateGetBook.dto';
 
 @Injectable()
 export class BooksService {
@@ -40,7 +40,7 @@ export class BooksService {
         }
         return await this.bookModel.deleteOne({_id: id});
     }
-    async updateOne(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
+    async updateOne(id: string, updateBookDto: UpdateGetBookDto): Promise<Book> {
         try {
             const book: Book = await this.findOne(id);
         } catch (e) {

@@ -4,7 +4,7 @@ import { CreateBookDto } from './dto/createBook.dto';
 import { Book } from './interfaces/book.interface';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { UpdateBookDto } from './dto/updateBook.dto';
+import { UpdateGetBookDto } from './dto/updateGetBook.dto';
 
 @ApiTags('books')
 @Controller('books')
@@ -39,7 +39,7 @@ export class BooksController {
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     @Put(':id')
-    update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto): Promise<Book> {
+    update(@Param('id') id: string, @Body() updateBookDto: UpdateGetBookDto): Promise<Book> {
         return this.booksService.updateOne(id, updateBookDto);
     }
 }

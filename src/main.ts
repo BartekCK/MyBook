@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { BooksModule } from './books/books.module';
 import { ValidationPipe } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
+import { RentModule } from './rent/rent.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,7 +17,7 @@ async function bootstrap() {
     .addTag('books')
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, options, {include: [AppModule, BooksModule, UsersModule]});
+  const document = SwaggerModule.createDocument(app, options, {include: [AppModule, BooksModule, UsersModule, RentModule]});
   SwaggerModule.setup('api', app, document);
   await app.listen(3000);
 }

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsNotEmpty, IsString, Max, Min } from 'class-validator';
 
-export class UpdateBookDto {
+export class UpdateGetBookDto {
   @ApiProperty()
   readonly title?: string;
 
