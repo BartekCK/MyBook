@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserDto } from '../users/dto/user.dto';
 import { LoginDto } from './dto/login.dto';
 import { User } from '../users/interfaces/user.interface';
+import { jwtConstants } from './constants';
 
 @Injectable()
 export class AuthService {
@@ -29,5 +30,10 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+   async decode(token: string): Promise<User> {
+    const Credentials: any = this.jwtService.decode(token.substring(7, token.length));
+    return await this.usersService.findOneById(Credentials.sub);
   }
 }

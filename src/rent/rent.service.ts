@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { UpdateGetBookDto } from '../books/dto/updateGetBook.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Rent } from './interfaces/rent.interface';
 import { Model } from 'mongoose';

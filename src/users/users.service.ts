@@ -17,16 +17,11 @@ export class UsersService {
     return await this.userModel.findOne({username: user});
   }
 
-  async findOneBtId(userId: string): Promise<User> {
+  async findOneById(userId: string): Promise<User> {
       const user: User = await this.userModel.findOne({_id: userId});
       if (!user) {
         throw new NotFoundException(`User with id ${userId} not found`);
       }
       return user;
   }
-
-  async findAll(): Promise<User[]> {
-    return await this.userModel.findAll();
-  }
-
 }
